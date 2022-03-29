@@ -8,9 +8,7 @@ export class AvailabilityMinuteRange {
   rangeMap = [];
 
   constructor() {
-    for (let i = 0; i < 1440; i++) {
-      this.rangeMap[i] = 0;
-    }
+    this.rangeMap = new Array(1440);
   }
 
   /**
