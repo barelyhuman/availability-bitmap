@@ -5,7 +5,7 @@ on:
   pull_request:
     branches: [dev]
 jobs:
-  format:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -14,7 +14,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: "12.x"
+      - name: Deps
+        run: yarn install --frozen-lockfile
       - name: Test
-        run: |
-          yarn install --frozen-lockfile
-          yarn test
+        run: yarn test

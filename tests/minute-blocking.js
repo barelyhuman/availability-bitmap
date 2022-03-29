@@ -50,7 +50,7 @@ test("2 min gap between blocks, min requirement 60 mins", () => {
   );
 
   const availability = minRange.nextAvailableFrom(
-    new Date(new Date().setHours(1, 0)),
+    new Date(new Date().setHours(1, 0, 0)),
     60
   );
 
@@ -107,6 +107,29 @@ test("Multiple Ranges", () => {
   }
 
   assert.ok(bookedSecond);
+});
+
+test("30 min between blocks, min requirement 30 mins", () => {
+  const minRange = new AvailabilityMinuteRange();
+
+  const blocked1 = minRange.blockTime(
+    new Date(new Date().setHours(0, 0, 0, 0)),
+    new Date(new Date().setHours(1, 0, 0, 0))
+  );
+
+  const blocked2 = minRange.blockTime(
+    new Date(new Date().setHours(1, 30, 0, 0)),
+    new Date(new Date().setHours(2, 0, 0, 0))
+  );
+
+  const availability = minRange.nextAvailableFrom(
+    new Date(new Date().setHours(1, 0, 0, 0)),
+    30
+  );
+
+  assert.ok(blocked1);
+  assert.ok(blocked2);
+  assert.ok(availability.availableFor >= 60);
 });
 
 test.run();

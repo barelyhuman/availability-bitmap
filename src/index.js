@@ -68,6 +68,9 @@ function nextAvailableFrom(date, minCount) {
 }
 
 export class AvailabilityMinuteRange {
+  /**
+   * @private
+   */
   rmap = [];
   /**
    * @type {blockTime}
@@ -79,6 +82,7 @@ export class AvailabilityMinuteRange {
   nextAvailableFrom;
 
   constructor() {
+    this.rmap = new Array(1440);
     this.blockTime = blockTime.bind(this);
     this.nextAvailableFrom = nextAvailableFrom.bind(this);
   }
