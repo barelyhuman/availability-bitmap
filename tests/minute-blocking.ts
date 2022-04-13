@@ -1,9 +1,9 @@
-import { AvailabilityMinuteRange } from "../src";
+import { createAvailabilityMinuteRange } from "../src";
 import { test } from "uvu";
 import * as assert from "uvu/assert";
 
 test("Basic Overlaping block", () => {
-  const minRange = new AvailabilityMinuteRange();
+  const minRange = createAvailabilityMinuteRange();
 
   const blocked1 = minRange.blockTime(
     new Date(new Date().setHours(0, 0, 0, 0)),
@@ -20,7 +20,7 @@ test("Basic Overlaping block", () => {
 });
 
 test("Basic Overlaping Block over minutes", () => {
-  const minRange = new AvailabilityMinuteRange();
+  const minRange = createAvailabilityMinuteRange();
 
   const blocked1 = minRange.blockTime(
     new Date(new Date().setHours(0, 0, 0, 0)),
@@ -37,7 +37,7 @@ test("Basic Overlaping Block over minutes", () => {
 });
 
 test("2 min gap between blocks, min requirement 60 mins", () => {
-  const minRange = new AvailabilityMinuteRange();
+  const minRange = createAvailabilityMinuteRange();
 
   const blocked1 = minRange.blockTime(
     new Date(new Date().setHours(0, 0, 0, 0)),
@@ -60,7 +60,7 @@ test("2 min gap between blocks, min requirement 60 mins", () => {
 });
 
 test("blocked completely", () => {
-  const minRange = new AvailabilityMinuteRange();
+  const minRange = createAvailabilityMinuteRange();
 
   const blocked1 = minRange.blockTime(
     new Date(new Date().setHours(0, 0, 0, 0)),
@@ -83,8 +83,8 @@ test("blocked completely", () => {
 });
 
 test("Multiple Ranges", () => {
-  const hotelOne = new AvailabilityMinuteRange();
-  const hotelTwo = new AvailabilityMinuteRange();
+  const hotelOne = createAvailabilityMinuteRange();
+  const hotelTwo = createAvailabilityMinuteRange();
   let bookedSecond = false;
 
   // book first one for 2 hours
@@ -110,7 +110,7 @@ test("Multiple Ranges", () => {
 });
 
 test("30 min between blocks, min requirement 30 mins", () => {
-  const minRange = new AvailabilityMinuteRange();
+  const minRange = createAvailabilityMinuteRange();
 
   const blocked1 = minRange.blockTime(
     new Date(new Date().setHours(0, 0, 0, 0)),

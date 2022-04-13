@@ -1,17 +1,32 @@
 {
+  "dist/README.md": {
+    "size": "27B",
+    "brotli": "31B",
+    "gzip": "47B"
+  },
   "dist/index.d.ts": {
-    "size": "353B",
-    "brotli": "161B",
-    "gzip": "202B"
+    "size": "373B",
+    "brotli": "167B",
+    "gzip": "205B"
   },
   "dist/index.js": {
-    "size": "1.287KB",
-    "brotli": "596B",
-    "gzip": "686B"
+    "size": "2.394KB",
+    "brotli": "792B",
+    "gzip": "910B"
   },
   "dist/index.mjs": {
-    "size": "686B",
-    "brotli": "330B",
-    "gzip": "386B"
+    "size": "1.322KB",
+    "brotli": "433B",
+    "gzip": "508B"
+  },
+  "dist/license": {
+    "size": "1.094KB",
+    "brotli": "490B",
+    "gzip": "666B"
+  },
+  "dist/package.json": {
+    "size": "354B",
+    "brotli": "189B",
+    "gzip": "231B"
   }
 }

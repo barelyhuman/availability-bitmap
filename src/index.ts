@@ -1,4 +1,4 @@
-function _minOfDay(date) {
+function _minOfDay(date: Date) {
   const d = new Date(date);
   const hour = d.getHours();
   const min = d.getMinutes();
@@ -6,45 +6,33 @@ function _minOfDay(date) {
   return minOfDay;
 }
 
-function _timeFromMinOfDay(minOfDay) {
+function _timeFromMinOfDay(minOfDay: number) {
   const hour = Math.floor((minOfDay - 0) / 60);
   const min = minOfDay % 60;
   return new Date(new Date().setHours(hour, min));
 }
 
-/**
- *
- * @param {Date} start
- * @param {Date} end
- * @returns {Boolean}
- */
-function blockTime(start, end) {
+function blockTime(start: Date, end: Date) {
   const ctx = this || {};
   const startMap = _minOfDay(new Date(start));
   const endMap = _minOfDay(new Date(end));
 
   for (let i = startMap; i < endMap; i += 1) {
-    if (ctx.rmap[i] === 1) {
+    if (ctx.__rmap[i] === 1) {
       return false;
     }
-    ctx.rmap[i] = 1;
+    ctx.__rmap[i] = 1;
   }
   return true;
 }
 
-/**
- *
- * @param {Date} date
- * @param {number} minCount
- * @returns
- */
-function nextAvailableFrom(date, minCount) {
+function nextAvailableFrom(date: Date, minCount: number) {
   const ctx = this || {};
   const startMap = _minOfDay(date);
   let count = 0;
   let point = 0;
-  for (let i = startMap; i < ctx.rmap.length; i++) {
-    if (ctx.rmap[i] === 1) {
+  for (let i = startMap; i < ctx.__rmap.length; i++) {
+    if (ctx.__rmap[i] === 1) {
       count = 0;
       continue;
     }
@@ -67,23 +55,10 @@ function nextAvailableFrom(date, minCount) {
   };
 }
 
-export class AvailabilityMinuteRange {
-  /**
-   * @private
-   */
-  rmap = [];
-  /**
-   * @type {blockTime}
-   */
-  blockTime;
-  /**
-   * @type {nextAvailableFrom}
-   */
-  nextAvailableFrom;
-
-  constructor() {
-    this.rmap = new Array(1440);
-    this.blockTime = blockTime.bind(this);
-    this.nextAvailableFrom = nextAvailableFrom.bind(this);
-  }
+export function createAvailabilityMinuteRange() {
+  return {
+    __rmap: new Array(1440),
+    blockTime,
+    nextAvailableFrom,
+  };
 }
